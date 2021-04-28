@@ -69,7 +69,8 @@ array(3) {
 }
 ```
 
-###getKeys()
+### getKeys()
+
 ```php
 $enum->getKeys();
 ```
@@ -84,7 +85,7 @@ array(3) {
   string(6) "VALUE3"
 }
 ```
-###toArray();
+### toArray();
 ```php
 $enum->toArray();
 ```
