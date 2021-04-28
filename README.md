@@ -18,7 +18,7 @@ composer require tleckie/enum
 
 ### Usage
 
-Extends class.
+Extends Enum class.
 
 ```php
 <?php
@@ -38,17 +38,24 @@ class MyEnum extends Enum {
 
 $enum = new MyEnum(3);
 
+// Dynamic static methods available
 $enum::VALUE3();    // new MyEnum(3)
-
 $enum::VALUE1();    // new MyEnum(1)
-
 $enum::VALUE2();    // new MyEnum(2)
-
+```
+```php
 $enum->getValue();  // int(3)
-
+```
+```php
 $enum->getValue();  // int(3)
-
+```
+```php
 $enum->getKey();    // "VALUE3"
+```
+
+### getValues();
+```php
+$enum->getValues();
 ```
 Output:
 ```bash
@@ -62,8 +69,8 @@ array(3) {
 }
 ```
 
+###getKeys()
 ```php
-// getKeys
 $enum->getKeys();
 ```
 Output:
@@ -77,8 +84,8 @@ array(3) {
   string(6) "VALUE3"
 }
 ```
+###toArray();
 ```php
-// toArray
 $enum->toArray();
 ```
 Output:
@@ -92,14 +99,10 @@ array(3) {
   int(3)
 }
 ```
-
+### Cast string
 ```php
-// string cast
 (string) MyEnum::VALUE1();   // "1"
 (string) new MyEnum(3);      // "3"
+(string) new MyEnum( MyEnum::VALUE1() );  // "1"
 ```
 
-```php
-// string cast
-(string)MyEnum::VALUE1();  // "1"
-```
