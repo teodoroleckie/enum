@@ -1,4 +1,4 @@
-# PHP enum 
+# PHP Enum object
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tleckie/enum.svg?style=flat-square)](https://packagist.org/packages/tleckie/enum)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/teodoroleckie/enum/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/teodoroleckie/enum/?branch=main)
