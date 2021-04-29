@@ -1,9 +1,11 @@
 <?php
 
-namespace Tleckie\Enum;
+namespace Tleckie\Enum\Tests;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use Tleckie\Enum\EnumInterface;
+use Tleckie\Enum\Enum;
 
 /**
  * Class EnumTest
