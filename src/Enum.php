@@ -18,7 +18,9 @@ use function array_values;
 class Enum implements EnumInterface
 {
     /** @var array */
-    private static array $constants;
+    private static array $constants = [];
+
+    protected static array $instances = [];
 
     /** @var mixed */
     private mixed $value;
@@ -33,11 +35,10 @@ class Enum implements EnumInterface
      */
     final public function __construct(mixed $value)
     {
-        static::$constants = static::constants();
-
         $value = ($value instanceof EnumInterface) ? $value->getValue() : $value;
 
         $this->key = static::searchNameByValue($value);
+
         $this->value = $value;
     }
 
@@ -46,9 +47,15 @@ class Enum implements EnumInterface
      */
     private static function constants(): array
     {
+        if (isset(static::$constants[static::class])) {
+            return static::$constants[static::class];
+        }
+
         $reflection = new ReflectionClass(static::class);
 
-        return $reflection->getConstants();
+        static::$constants[static::class] =  $reflection->getConstants();
+
+        return static::$constants[static::class];
     }
 
     /**
@@ -65,7 +72,7 @@ class Enum implements EnumInterface
      */
     private static function searchNameByValue(mixed $value): string
     {
-        $name = array_search($value, static::$constants, true);
+        $name = array_search($value, static::constants(), true);
         if (false === $name) {
             throw new InvalidArgumentException(sprintf('Constant value [%s] not found', $value));
         }
@@ -80,11 +87,16 @@ class Enum implements EnumInterface
      */
     final public static function __callStatic(string $name, array $arguments): self
     {
-        if (!array_key_exists($name, static::$constants)) {
+        if (!array_key_exists($name, static::constants())) {
             throw new InvalidArgumentException(sprintf('Constant [%s] is not defined', $name));
         }
+        if (isset(static::$instances[static::class][$name])) {
+            return static::$instances[static::class][$name];
+        }
 
-        return new static(static::$constants[$name]);
+        static::$instances[static::class][$name] = new static(static::constants()[$name]);
+
+        return static::$instances[static::class][$name];
     }
 
     /**
@@ -92,7 +104,7 @@ class Enum implements EnumInterface
      */
     public function getValues(): array
     {
-        return array_values(static::$constants);
+        return array_values(static::$constants[static::class]);
     }
 
     /**
@@ -100,7 +112,7 @@ class Enum implements EnumInterface
      */
     public function getKeys(): array
     {
-        return array_keys(static::$constants);
+        return array_keys(static::$constants[static::class]);
     }
 
     /**
@@ -116,7 +128,7 @@ class Enum implements EnumInterface
      */
     public function toArray(): array
     {
-        return static::$constants;
+        return static::$constants[static::class];
     }
 
     /**

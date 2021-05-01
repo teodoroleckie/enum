@@ -53,7 +53,7 @@ class EnumTest extends TestCase
     public function keysValues(): void
     {
         $this->enum = new DummyEnum(5);
-        static::assertEquals(["VALUE", "OTHER", "PRODUCT"], $this->enum->getKeys());
+        static::assertEquals(["VALUE1", "VALUE2", "VALUE5"], $this->enum->getKeys());
         static::assertEquals([0 => 1, 1=> 2, 2=> 5], $this->enum->getValues());
     }
 
@@ -66,22 +66,22 @@ class EnumTest extends TestCase
 
         return [
             [
-                "1", $this->enum::VALUE()
+                "1", $this->enum::VALUE1()
             ],
             [
-                "2", $this->enum::OTHER(),
+                "2", $this->enum::VALUE2(),
             ],
             [
                 "5", new DummyEnum(new DummyEnum(5)),
             ],
             [
-                5, $this->enum->getValue(),
+                "5", $this->enum->getValue(),
             ],
             [
-                "PRODUCT", $this->enum->getKey(),
+                "VALUE5", $this->enum->getKey(),
             ],
             [
-                ["VALUE" => 1, "OTHER" => 2, "PRODUCT" => 5], $this->enum->toArray(),
+                ["VALUE1" => 1, "VALUE2" => 2, "VALUE5" => 5], $this->enum->toArray(),
             ]
         ];
     }
@@ -96,9 +96,9 @@ class EnumTest extends TestCase
  */
 class DummyEnum extends Enum
 {
-    public const VALUE = 1;
+    public const VALUE1 = 1;
 
-    public const OTHER = 2;
+    public const VALUE2 = 2;
 
-    public const PRODUCT = 5;
+    public const VALUE5 = 5;
 }
