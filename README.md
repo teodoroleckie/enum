@@ -43,6 +43,16 @@ $enum::VALUE3();    // new MyEnum(3)
 $enum::VALUE1();    // new MyEnum(1)
 $enum::VALUE2();    // new MyEnum(2)
 ```
+
+```php
+
+public function edit(MyEnum $enum){
+    //...
+}
+
+$object->edit(MyEnum::VALUE1());
+```
+
 ```php
 $enum->getValue();  // int(3)
 ```
