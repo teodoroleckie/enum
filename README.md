@@ -26,6 +26,9 @@ Extends Enum class.
 /**
  * Class MyEnum
  *
+ * @method static MyEnum VALUE1()
+ * @method static MyEnum VALUE2()
+ * @method static MyEnum VALUE3()
  * @author Teodoro Leckie Westberg <teodoroleckie@gmail.com>
  */
 class MyEnum extends Enum {
