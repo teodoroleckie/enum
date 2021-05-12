@@ -18,105 +18,84 @@ composer require tleckie/enum
 
 ### Usage
 
-Extends Enum class.
+Extends Enum class and create your own type.
 
 ```php
 <?php
 
 /**
- * Class MyEnum
+ * Class Vehicle
  *
- * @method static MyEnum VALUE1()
- * @method static MyEnum VALUE2()
- * @method static MyEnum VALUE3()
+ * @method static Vehicle CAR()
+ * @method static Vehicle MOTORCYCLE()
+ * @method static Vehicle BIKE()
+ * @method static Vehicle TRICYCLE()
  * @author Teodoro Leckie Westberg <teodoroleckie@gmail.com>
  */
-class MyEnum extends Enum {
-
-    public const VALUE1 = 1;
-    public const VALUE2 = 2;
-    public const VALUE3 = 3;
+class Vehicle extends Enum 
+{
+    public const CAR = 1;
+    public const MOTORCYCLE = 2;
+    public const BIKE = 3;
+    public const TRICYCLE = 4;
 }
 
-
-$enum = new MyEnum(3);
+$vehicle = new Vehicle(3);
 
 // Dynamic static methods available
-$enum::VALUE3();    // new MyEnum(3)
-$enum::VALUE1();    // new MyEnum(1)
-$enum::VALUE2();    // new MyEnum(2)
+$vehicle::CAR();           // new Vehicle(1)
+$vehicle::MOTORCYCLE();    // new Vehicle(2)
+$vehicle::BIKE();          // new Vehicle(3)
+$vehicle::TRICYCLE();      // new Vehicle(4)
+.
+.
+.
+Vehicle::CAR();           // new Vehicle(1)
+Vehicle::MOTORCYCLE();    // new Vehicle(2)
+Vehicle::BIKE();          // new Vehicle(3)
+Vehicle::TRICYCLE();      // new Vehicle(4)
 ```
 
 ```php
 
-public function edit(MyEnum $enum){
+public function edit(Vehicle $vehicle){
     //...
 }
 
-$object->edit(MyEnum::VALUE1());
+$object->edit(Vehicle::CAR());
+
 ```
 
 ```php
-$enum->getValue();  // int(3)
-```
-```php
-$enum->getValue();  // int(3)
-```
-```php
-$enum->getKey();    // "VALUE3"
+$vehicle = new Vehicle(3);
+
+$vehicle->getValue();  // int(3)
+$vehicle->getKey();    // "BIKE"
 ```
 
-### getValues();
+### getValues():
 ```php
-$enum->getValues();
-```
-Output:
-```bash
-array(3) {
-  [0]=>
-  int(1)
-  [1]=>
-  int(2)
-  [2]=>
-  int(3)
-}
+$vehicle = new Vehicle(3);
+$vehicle->getValues(); // [1,2,3,4]
 ```
 
-### getKeys()
+### getKeys():
+```php
+$vehicle = new Vehicle(3);
+$vehicle->getKeys();    //["CAR","MOTORCYCLE","BIKE","TRICYCLE"]
+```
+
+### toArray():
 
 ```php
-$enum->getKeys();
+$vehicle = new Vehicle(3);
+$vehicle->toArray();   //["CAR" => 1,"MOTORCYCLE" => 2,"BIKE" => 3,"TRICYCLE" => 4]
 ```
-Output:
-```bash
-array(3) {
-  [0]=>
-  string(6) "VALUE1"
-  [1]=>
-  string(6) "VALUE2"
-  [2]=>
-  string(6) "VALUE3"
-}
-```
-### toArray();
-```php
-$enum->toArray();
-```
-Output:
-```bash
-array(3) {
-  ["VALUE1"]=>
-  int(1)
-  ["VALUE2"]=>
-  int(2)
-  ["VALUE3"]=>
-  int(3)
-}
-```
+
 ### Cast string
 ```php
-(string) MyEnum::VALUE1();   // "1"
-(string) new MyEnum(3);      // "3"
-(string) new MyEnum( MyEnum::VALUE1() );  // "1"
+(string) Vehicle::MOTORCYCLE();             // "2"
+(string) new Vehicle(3);                    // "3"
+(string) new Vehicle( Vehicle::TRICYCLE() );// "4"
+(string) new Vehicle( new Vehicle(1) );     // "1"
 ```
-
