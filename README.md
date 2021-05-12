@@ -30,6 +30,7 @@ Extends Enum class and create your own type.
  * @method static Vehicle MOTORCYCLE()
  * @method static Vehicle BIKE()
  * @method static Vehicle TRICYCLE()
+ * 
  * @author Teodoro Leckie Westberg <teodoroleckie@gmail.com>
  */
 class Vehicle extends Enum 
