@@ -1,7 +1,7 @@
 {
   "name": "tleckie/enum",
   "license": "MIT",
-  "description": "PHP Enum object",
+  "description": "PHP Enum. One advantage over using class constants is to be able to use an enum as a parameter type",
   "type": "library",
   "homepage": "https://github.com/teodoroleckie/enum",
   "authors": [
